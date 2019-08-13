@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'practice1.wsgi.application'
 #     }
 # }
 
-lolipopで実行するとき（pushの時）
+# lolipopで実行するとき（pushの時）
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
