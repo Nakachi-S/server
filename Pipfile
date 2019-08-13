@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+# ここ以下を編集する (ここのコメントアウトは記入しない)
+[packages]
+Django = "==2.1"
+pillow = "*"
+mysqlclient = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-jwt = "*"
+djangorestframework_camel_case = "*"
+six = "*"
+gunicorn = "*"
+
+[dev-packages]
+[requires]
+python_version = "3.6"
