@@ -8,6 +8,7 @@ from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
+    #ゲストユーザーのmanager
     def create_user(self, request_data, **kwargs):
         now = timezone.now()
         if not request_data['email']:
@@ -25,7 +26,8 @@ class UserManager(BaseUserManager):
         user.set_password(request_data['password'])
         user.save(using=self._db)
         return user
-
+    
+    # 管理者のmanager
     def create_superuser(self, email, password, **extra_fields):
         request_data = {
             # 'username': username,

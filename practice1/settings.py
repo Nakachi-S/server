@@ -40,10 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'practice1',
-    'account',
-    'rest_framework',
-    'rest_framework_jwt',
+    'practice1', # 追加
+    'account', # 追加
+    'rest_framework', # 追加
+    'rest_framework_jwt', # 追加
+    'corsheaders', # 追加
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # 追加
 ]
 
 ROOT_URLCONF = 'practice1.urls'
@@ -172,6 +174,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+CORS_ORIGIN_ALLOW_ALL = True # 追加
 
 
 # Static files (CSS, JavaScript, Images)
