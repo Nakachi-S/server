@@ -9,7 +9,7 @@ from django.utils import timezone
 
 class UserManager(BaseUserManager):
     #ゲストユーザーのmanager
-    def create_user(self, request_data, **kwargs):
+    def create_user_guest(self, request_data, **kwargs):
         now = timezone.now()
         if not request_data['email']:
             raise ValueError('Users must have an email address.')
@@ -20,6 +20,7 @@ class UserManager(BaseUserManager):
             is_active=True,
             last_login=now,
             date_joined=now,
+            is_host=False,
             # profile=profile
         )
 
@@ -27,7 +28,27 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    # 管理者のmanager
+    #ホストユーザーのmanager
+    def create_user_host(self, request_data, **kwargs):
+        now = timezone.now()
+        if not request_data['email']:
+            raise ValueError('Users must have an email address.')
+
+        user = self.model(
+            # username=request_data['username'],
+            email=self.normalize_email(request_data['email']),
+            is_active=True,
+            last_login=now,
+            date_joined=now,
+            is_host=True,
+            # profile=profile
+        )
+
+        user.set_password(request_data['password'])
+        user.save(using=self._db)
+        return user
+    
+    # 管理者のmanager(hostではない)
     def create_superuser(self, email, password, **extra_fields):
         request_data = {
             # 'username': username,
@@ -52,6 +73,7 @@ class User(AbstractBaseUser):
     is_active   = models.BooleanField(default=True)
     is_staff    = models.BooleanField(default=False)
     is_admin    = models.BooleanField(default=False)
+    is_host     = models.BooleanField(default=False)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = UserManager()
