@@ -98,8 +98,8 @@ WSGI_APPLICATION = 'practice1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '21474a7686ac98515284ffa720e1e520', #　作成したデータベース名
-        'USER': '21474a7686ac98515284ffa720e1e520', # ログインユーザー名
+        'NAME': '13e7c157702a2b24f27522f1dd983af1', #　作成したデータベース名
+        'USER': '13e7c157702a2b24f27522f1dd983af1', # ログインユーザー名
         'PASSWORD': 'PkcwLA9oPkcwLA9o',
         'HOST': 'mysql-1.mc.lolipop.lan',
         'PORT': '',
