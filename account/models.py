@@ -18,9 +18,10 @@ class UserManager(BaseUserManager):
             # username=request_data['username'],
             email=self.normalize_email(request_data['email']),
             is_active=True,
-            last_login=now,
+            # last_login=now,
             date_joined=now,
             is_host=False,
+            
             # profile=profile
         )
 
@@ -38,7 +39,7 @@ class UserManager(BaseUserManager):
             # username=request_data['username'],
             email=self.normalize_email(request_data['email']),
             is_active=True,
-            last_login=now,
+            # last_login=now,
             date_joined=now,
             is_host=True,
             # profile=profile
@@ -74,6 +75,7 @@ class User(AbstractBaseUser):
     is_staff    = models.BooleanField(default=False)
     is_admin    = models.BooleanField(default=False)
     is_host     = models.BooleanField(default=False)
+    is_info     = models.BooleanField(default=False)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = UserManager()
