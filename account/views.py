@@ -9,8 +9,8 @@ from django.http import HttpResponse, Http404
 from rest_framework import status, viewsets, filters
 from rest_framework.views import APIView
 
-from .serializer import AccountSerializerGuest, AccountSerializerHost
-from .models import User, UserManager
+from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer
+from .models import User, UserManager, Guest_info
 
 # ゲストユーザ作成のView(POST)
 class AuthRegisterGuest(generics.CreateAPIView):
@@ -39,3 +39,20 @@ class AuthRegisterHost(generics.CreateAPIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+# ゲストユーザの宿泊台帳のView(POST)
+class GuestInfoView(generics.CreateAPIView):
+    # permission_classes = (permissions.AllowAny,)
+    queryset = Guest_info.objects.all()
+    serializer_class = GuestInfoSerializer
+    
+    def post(self, request, format=None):
+        serializer = GuestInfoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    

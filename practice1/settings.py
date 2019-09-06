@@ -83,28 +83,28 @@ WSGI_APPLICATION = 'practice1.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 # cloud9で実行するとき
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django', #　作成したデータベース名
-        'USER': 'django', # ログインユーザー名
-        'PASSWORD': 'django',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-
-# lolipopで実行するとき（pushの時）
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': '13e7c157702a2b24f27522f1dd983af1', #　作成したデータベース名
-#         'USER': '13e7c157702a2b24f27522f1dd983af1', # ログインユーザー名
-#         'PASSWORD': 'PkcwLA9oPkcwLA9o',
-#         'HOST': 'mysql-1.mc.lolipop.lan',
+#         'NAME': 'django', #　作成したデータベース名
+#         'USER': 'django', # ログインユーザー名
+#         'PASSWORD': 'django',
+#         'HOST': 'localhost',
 #         'PORT': '',
 #     }
 # }
+
+# lolipopで実行するとき（pushの時）
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '13e7c157702a2b24f27522f1dd983af1', #　作成したデータベース名
+        'USER': '13e7c157702a2b24f27522f1dd983af1', # ログインユーザー名
+        'PASSWORD': 'PkcwLA9oPkcwLA9o',
+        'HOST': 'mysql-1.mc.lolipop.lan',
+        'PORT': '',
+    }
+}
 
 # DATABASES = {
 #     'default': {

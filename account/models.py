@@ -64,7 +64,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+# Userモデル
 class User(AbstractBaseUser):
     # username    = models.CharField(_('username'), max_length=30, unique=True)
     # first_name  = models.CharField(_('first name'), max_length=30, blank=True)
@@ -102,3 +102,18 @@ class User(AbstractBaseUser):
     class Meta:
         db_table = 'user'
         swappable = 'AUTH_USER_MODEL'
+
+
+# Guest_infoモデル
+class Guest_info(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    country     = models.CharField(max_length=8)
+    birth_day   = models.DateField(null=True)
+    address     = models.CharField(max_length=255)
+    gender      = models.BooleanField(null=True)
+    qr_code     = models.CharField(max_length=255, unique=True, null=True)
+    
