@@ -117,3 +117,8 @@ class Guest_info(models.Model):
     gender      = models.BooleanField(null=True)
     qr_code     = models.CharField(max_length=255, unique=True, null=True)
     
+    USERNAME_FIELD = 'user'
+    
+    class Meta:
+        db_table = 'guest_info'
+    

@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer
 from .models import User, UserManager, Guest_info
 
+
 # ゲストユーザ作成のView(POST)
 class AuthRegisterGuest(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -42,8 +43,8 @@ class AuthRegisterHost(generics.CreateAPIView):
         
         
 # ゲストユーザの宿泊台帳のView(POST)
-class GuestInfoView(generics.CreateAPIView):
-    # permission_classes = (permissions.AllowAny,)
+class GuestInfoPost(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
     queryset = Guest_info.objects.all()
     serializer_class = GuestInfoSerializer
     
@@ -53,6 +54,11 @@ class GuestInfoView(generics.CreateAPIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
-    
+
+
+class GuestInfoGet(generics.RetrieveAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Guest_info.objects.all()
+    # lookup_field = 'user_id'
+    serializer_class = GuestInfoSerializer
+    # lookup_field='user_id'
