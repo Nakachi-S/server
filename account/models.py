@@ -56,7 +56,7 @@ class UserManager(BaseUserManager):
             'email': email,
             'password': password
         }
-        user = self.create_user(request_data)
+        user = self.create_user_guest(request_data)
         user.is_active = True
         user.is_staff = True
         user.is_admin = True
