@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
             # username=request_data['username'],
             email=self.normalize_email(request_data['email']),
             is_active=True,
-            # last_login=now,
+            last_login=now,
             date_joined=now,
             is_host=False,
             
@@ -39,7 +39,7 @@ class UserManager(BaseUserManager):
             # username=request_data['username'],
             email=self.normalize_email(request_data['email']),
             is_active=True,
-            # last_login=now,
+            last_login=now,
             date_joined=now,
             is_host=True,
             # profile=profile
@@ -56,7 +56,7 @@ class UserManager(BaseUserManager):
             'email': email,
             'password': password
         }
-        user = self.create_user(request_data)
+        user = self.create_user_guest(request_data)
         user.is_active = True
         user.is_staff = True
         user.is_admin = True
@@ -112,13 +112,28 @@ class Guest_info(models.Model):
         primary_key=True,
     )
     country     = models.CharField(max_length=8)
-    birth_day   = models.DateField(null=True)
+    birth_day   = models.DateField()
     address     = models.CharField(max_length=255)
-    gender      = models.BooleanField(null=True)
-    qr_code     = models.CharField(max_length=255, unique=True, null=True)
+    gender      = models.BooleanField(default=False)
     
     USERNAME_FIELD = 'user'
     
     class Meta:
         db_table = 'guest_info'
+
+# Host_infoモデル
+class Host_info(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    hotel_name  = models.CharField(max_length=128)
+    phone       = models.CharField(max_length=32)
+    address     = models.CharField(max_length=128)
+    qr_code     = models.CharField(max_length=255, unique=True, null=True)
     
+    USERNAME_FIELD = 'user'
+    
+    class Meta:
+        db_table = 'host_info'

@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from rest_framework import status, viewsets, filters
 from rest_framework.views import APIView
 
-from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer
+from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer, HostInfoSerializer
 from .models import User, UserManager, Guest_info
 
 
@@ -42,7 +42,7 @@ class AuthRegisterHost(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         
-# ゲストユーザの宿泊台帳のView(POST)
+# ゲストユーザの宿泊台帳(POST)
 class GuestInfoPost(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Guest_info.objects.all()
@@ -55,10 +55,32 @@ class GuestInfoPost(generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+# ゲストユーザの宿泊台帳(GET)
 class GuestInfoGet(generics.RetrieveAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Guest_info.objects.all()
     # lookup_field = 'user_id'
     serializer_class = GuestInfoSerializer
-    # lookup_field='user_id'
+
+
+
+# ホストユーザの情報(POST)
+class HostInfoPost(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Guest_info.objects.all()
+    serializer_class = HostInfoSerializer
+    
+    def post(self, request, format=None):
+        serializer = HostInfoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# ホストユーザの情報(GET)
+class HostInfoGet(generics.RetrieveAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Guest_info.objects.all()
+    # lookup_field = 'user_id'
+    serializer_class = HostInfoSerializer
