@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from rest_framework import status, viewsets, filters
 from rest_framework.views import APIView
 
-from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer, HostInfoSerializer
+from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer, HostInfoSerializer, AccountSerializer
 from .models import User, UserManager, Guest_info
 
 
@@ -17,7 +17,7 @@ from .models import User, UserManager, Guest_info
 class AuthInfoGetView(generics.RetrieveAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all()
-    serializer_class = AccountSerializerGuest
+    serializer_class = AccountSerializer
 
     def get(self, request, format=None):
         return Response(data={

@@ -25,6 +25,13 @@ class AccountSerializerHost(serializers.ModelSerializer):
     def create(self, validated_data):
         return User.objects.create_user_host(request_data=validated_data)
 
+# ログイン情報取得用
+class AccountSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=False)
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'is_info')
 
 # 宿泊台帳用
 class GuestInfoSerializer(serializers.ModelSerializer):
