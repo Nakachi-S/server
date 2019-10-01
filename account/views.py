@@ -13,6 +13,19 @@ from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfo
 from .models import User, UserManager, Guest_info
 
 
+# ユーザ情報取得のView(GET)
+class AuthInfoGetView(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.all()
+    serializer_class = AccountSerializerGuest
+
+    def get(self, request, format=None):
+        return Response(data={
+            # 'username': request.user.username,
+            'email': request.user.email,
+            },
+            status=status.HTTP_200_OK)
+
 # ゲストユーザ作成のView(POST)
 class AuthRegisterGuest(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
