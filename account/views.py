@@ -22,6 +22,7 @@ class AuthInfoGetView(generics.RetrieveAPIView):
     def get(self, request, format=None):
         return Response(data={
             # 'username': request.user.username,
+            'id': request.user.id,
             'email': request.user.email,
             },
             status=status.HTTP_200_OK)
