@@ -31,7 +31,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'is_info')
+        fields = ('id', 'email', 'is_info', 'is_host')
 
 # 宿泊台帳用
 class GuestInfoSerializer(serializers.ModelSerializer):
@@ -52,8 +52,15 @@ class GuestInfoSerializer(serializers.ModelSerializer):
             birth_day=validated_data['birth_day'],
             gender=validated_data['gender'],
         )
-
+        
         guest_info.save()
+        
+        # userテーブルのis_inforをTrueにする
+        # print(validated_data['user'].id)
+        tmp = User.objects.get(pk=validated_data['user'].id)
+        tmp.is_info = True
+        tmp.save()
+        
         return guest_info
     
 # ホストユーザの情報
@@ -78,6 +85,13 @@ class HostInfoSerializer(serializers.ModelSerializer):
         )
 
         host_info.save()
+        
+        # userテーブルのis_inforをTrueにする
+        # print(validated_data['user'].id)
+        tmp = User.objects.get(pk=validated_data['user'].id)
+        tmp.is_info = True
+        tmp.save()
+        
         return host_info
 
 
