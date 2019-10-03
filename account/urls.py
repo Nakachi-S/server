@@ -12,4 +12,5 @@ urlpatterns = [
     path('guest_info_get/<int:pk>/', GuestInfoGet.as_view()),
     path('host_info_post/', HostInfoPost.as_view()),
     path('host_info_get/<int:pk>', HostInfoGet.as_view()),
+    # path('qr_code_post', HostInfoGetByQR.as_view())
 ]

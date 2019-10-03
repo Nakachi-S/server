@@ -100,3 +100,20 @@ class HostInfoGet(generics.RetrieveAPIView):
     queryset = Host_info.objects.all()
     # lookup_field = 'user_id'
     serializer_class = HostInfoSerializer
+
+# Qrコードでホテル情報をGET
+class HostInfoGetByQR(generics.RetrieveAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Host_info.objects.all()
+    # lookup_field = 'user_id'
+    serializer_class = HostInfoSerializer
+    
+    def get(self, request, format=None):
+        return Response(data={
+            # 'username': request.user.username,
+            'id': request.user.id,
+            'email': request.user.email,
+            'is_info': request.user.is_info,
+            'is_host': request.user.is_host
+            },
+            status=status.HTTP_200_OK)
