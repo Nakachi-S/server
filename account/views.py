@@ -10,7 +10,7 @@ from rest_framework import status, viewsets, filters
 from rest_framework.views import APIView
 
 from .serializer import AccountSerializerGuest, AccountSerializerHost, GuestInfoSerializer, HostInfoSerializer, AccountSerializer
-from .models import User, UserManager, Guest_info
+from .models import User, UserManager, Guest_info, Host_info
 
 
 # ユーザ情報取得のView(GET)
@@ -97,6 +97,6 @@ class HostInfoPost(generics.CreateAPIView):
 # ホストユーザの情報(GET)
 class HostInfoGet(generics.RetrieveAPIView):
     permission_classes = (permissions.AllowAny,)
-    queryset = Guest_info.objects.all()
+    queryset = Host_info.objects.all()
     # lookup_field = 'user_id'
     serializer_class = HostInfoSerializer

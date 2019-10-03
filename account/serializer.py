@@ -55,7 +55,7 @@ class GuestInfoSerializer(serializers.ModelSerializer):
         
         guest_info.save()
         
-        # userテーブルのis_inforをTrueにする
+        # userテーブルのis_infoをTrueにする
         # print(validated_data['user'].id)
         tmp = User.objects.get(pk=validated_data['user'].id)
         tmp.is_info = True
@@ -86,7 +86,7 @@ class HostInfoSerializer(serializers.ModelSerializer):
 
         host_info.save()
         
-        # userテーブルのis_inforをTrueにする
+        # userテーブルのis_infoをTrueにする
         # print(validated_data['user'].id)
         tmp = User.objects.get(pk=validated_data['user'].id)
         tmp.is_info = True
